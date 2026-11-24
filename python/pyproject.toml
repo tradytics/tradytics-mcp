@@ -1,0 +1,56 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tradytics-mcp"
+dynamic = ["version"]
+description = "MCP server for US stock market data: options flow, dark pool prints, dealer gamma, stock perpetuals, fundamentals, SEC filings, and prediction markets via Tradytics."
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "MIT" }
+authors = [{ name = "Tradytics", email = "hello@tradytics.com" }]
+keywords = [
+  "mcp",
+  "mcp-server",
+  "model-context-protocol",
+  "stock-market",
+  "options-flow",
+  "dark-pool",
+  "gamma-exposure",
+  "sec-filings",
+  "fundamentals",
+  "prediction-markets",
+  "finance",
+  "trading",
+  "claude",
+  "cursor",
+  "tradytics",
+]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Topic :: Office/Business :: Financial :: Investment",
+]
+
+[project.scripts]
+tradytics-mcp = "tradytics_mcp.cli:main"
+
+[project.urls]
+Homepage = "https://tradytics.com/docs/mcp"
+Documentation = "https://tradytics.com/docs/mcp"
+Repository = "https://github.com/tradytics/tradytics-mcp"
+"API keys" = "https://tradytics.com/developer/keys"
+
+[tool.setuptools]
+packages = ["tradytics_mcp"]
+
+[tool.setuptools.dynamic]
+version = { attr = "tradytics_mcp.__version__" }

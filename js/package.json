@@ -1,0 +1,47 @@
+{
+  "name": "tradytics-mcp",
+  "version": "0.1.0",
+  "description": "MCP server for US stock market data: options flow, dark pool prints, dealer gamma, stock perpetuals, fundamentals, SEC filings, and prediction markets via Tradytics.",
+  "type": "module",
+  "bin": {
+    "tradytics-mcp": "./bin/tradytics-mcp.js"
+  },
+  "files": [
+    "bin/",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT",
+  "author": "Tradytics <hello@tradytics.com>",
+  "homepage": "https://tradytics.com/docs/mcp",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tradytics/tradytics-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tradytics/tradytics-mcp/issues"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "model-context-protocol",
+    "stock-market",
+    "options-flow",
+    "dark-pool",
+    "gamma-exposure",
+    "sec-filings",
+    "fundamentals",
+    "earnings-transcripts",
+    "prediction-markets",
+    "market-data",
+    "finance",
+    "trading",
+    "claude",
+    "cursor",
+    "chatgpt",
+    "tradytics"
+  ]
+}
