@@ -1,6 +1,6 @@
 {
   "name": "tradytics-mcp",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "MCP server for US stock market data: options flow, dark pool prints, dealer gamma, stock perpetuals, fundamentals, SEC filings, and prediction markets via Tradytics.",
   "type": "module",
   "bin": {

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { createInterface } from 'node:readline'
 
-const VERSION = '0.1.0'
+const VERSION = '0.1.1'
 const DEFAULT_URL = 'https://tradytics.com/mcp'
 
 function parseArgs(argv) {

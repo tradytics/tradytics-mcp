@@ -1,30 +1,42 @@
-# Tradytics MCP Server (`tradytics-mcp`)
+<p align="center">
+  <a href="https://tradytics.com/docs/mcp"><img src="https://tradytics.com/api/v2/og/sdk.png?v=4" alt="Tradytics Market Data MCP Server" width="100%"></a>
+</p>
 
-[![Tradytics MCP connector](https://glama.ai/mcp/connectors/com.tradytics/market-data/badges/score.svg)](https://glama.ai/mcp/connectors/com.tradytics/market-data)
+# Tradytics MCP Server
+
+The official Model Context Protocol (MCP) server for [Tradytics](https://tradytics.com): US stock quotes and bars, stitched options flow, options chains, dealer gamma/vanna/charm, ranked dark pool prints, stock perpetuals, fundamentals, SEC filings with semantic passage search, earnings transcripts, insider/13F/Congress disclosures, and Kalshi/Polymarket prediction markets. Zero dependencies.
+
 [![npm](https://img.shields.io/npm/v/tradytics-mcp?color=168eff&label=npm)](https://www.npmjs.com/package/tradytics-mcp)
 [![PyPI](https://img.shields.io/pypi/v/tradytics-mcp?color=168eff&label=pypi)](https://pypi.org/project/tradytics-mcp/)
-[![License: MIT](https://img.shields.io/badge/license-MIT-16171a)](LICENSE)
+[![MCP](https://img.shields.io/badge/MCP-Streamable%20HTTP%20%2B%20stdio-16171a)](https://tradytics.com/docs/mcp)
+[![Docs](https://img.shields.io/badge/docs-tradytics.com-16171a)](https://tradytics.com/docs/mcp)
+[![License](https://img.shields.io/badge/license-MIT-16171a)](LICENSE)
+[![Tradytics MCP connector](https://glama.ai/mcp/connectors/com.tradytics/market-data/badges/score.svg)](https://glama.ai/mcp/connectors/com.tradytics/market-data)
 
-Official Model Context Protocol (MCP) server for [Tradytics](https://tradytics.com) US market data: stitched options flow, options chains, dealer gamma/vanna/charm, ranked dark pool prints, stock perpetuals, stock quotes and bars, company fundamentals, SEC filings with semantic passage search, earnings transcripts, insider/13F/Congress disclosures, screener signals, and Kalshi/Polymarket prediction market odds.
-
-Connect in two ways:
-1. **Remote Streamable HTTP + OAuth (recommended for Claude, ChatGPT, Cursor):** `https://tradytics.com/mcp`
-2. **Local stdio bridge (`npx -y tradytics-mcp` or `uvx tradytics-mcp`):** zero-dependency bridge using `TRADYTICS_API_KEY` for Claude Desktop, Cline, Windsurf, Docker agents, LangChain, CrewAI, and headless workflows.
-
----
-
-## Option 1: Hosted Remote MCP (OAuth, Zero Install)
-
-- **Server URL:** `https://tradytics.com/mcp`
-- **Official MCP Registry ID:** `com.tradytics/market-data`
-- **Setup guide:** [tradytics.com/docs/mcp](https://tradytics.com/docs/mcp)
-
-### Claude Code
 ```bash
+# Hosted Streamable HTTP + OAuth (Claude Code)
 claude mcp add --transport http tradytics https://tradytics.com/mcp
+
+# Local stdio bridge (Node 18+ or Python 3.8+, zero dependencies)
+TRADYTICS_API_KEY="tdy_..." npx -y tradytics-mcp
+TRADYTICS_API_KEY="tdy_..." uvx tradytics-mcp
 ```
 
-### Cursor (`.cursor/mcp.json`)
+## What your agent gets
+
+- **Options flow and chains**: full OPRA tape stitched into sweeps, blocks and splits with inferred trade side, plus live chains, contract bars, open interest and implied volatility.
+- **Dealer positioning**: pre-computed gamma, delta, vanna and charm by strike and expiry, with gamma flip, call wall and put wall.
+- **Dark pools**: block and off-exchange prints ranked against each stock's rolling 12 months, plus key institutional price levels.
+- **Fundamentals and SEC filings**: income statements, balance sheets, cash flows, revenue segments, KPIs, earnings call transcripts, Form 4 insiders, 13F institutions, Congress trades, and semantic passage search across 10-K/10-Q/8-K filings with EDGAR links.
+- **Equities, perpetuals and probabilities**: US quotes and bars, full-market screener, flow signals, 24/7 stock perpetuals, and Kalshi/Polymarket finance probabilities.
+
+## Quickstart
+
+### 1. Hosted Remote MCP (OAuth, zero install)
+
+Recommended for **Claude**, **Claude Code**, **ChatGPT**, and **Cursor**. Point your client at `https://tradytics.com/mcp` and sign in with OAuth.
+
+**Cursor (`.cursor/mcp.json`):**
 ```json
 {
   "mcpServers": {
@@ -35,13 +47,11 @@ claude mcp add --transport http tradytics https://tradytics.com/mcp
 }
 ```
 
----
+### 2. Local Stdio MCP (`npx` / `uvx` / `pip`, API key auth)
 
-## Option 2: Local Stdio MCP (`npx` / `uvx` / `pip`, API Key Auth)
+Recommended for **Claude Desktop**, **Cline**, **Windsurf**, Docker containers, and headless agents. Create a free API key at [tradytics.com/developer/keys](https://tradytics.com/developer/keys).
 
-Create an API key at [tradytics.com/developer/keys](https://tradytics.com/developer/keys) and configure your MCP client:
-
-### Node.js (`npx`, Node 18+, zero dependencies)
+**Node.js (`npx`):**
 ```json
 {
   "mcpServers": {
@@ -49,14 +59,14 @@ Create an API key at [tradytics.com/developer/keys](https://tradytics.com/develo
       "command": "npx",
       "args": ["-y", "tradytics-mcp"],
       "env": {
-        "TRADYTICS_API_KEY": "tdy_your_key_here"
+        "TRADYTICS_API_KEY": "tdy_..."
       }
     }
   }
 }
 ```
 
-### Python (`uvx` or `pip install tradytics-mcp`, Python 3.8+, zero dependencies)
+**Python (`uvx` or `pip install tradytics-mcp`):**
 ```json
 {
   "mcpServers": {
@@ -64,45 +74,47 @@ Create an API key at [tradytics.com/developer/keys](https://tradytics.com/develo
       "command": "uvx",
       "args": ["tradytics-mcp"],
       "env": {
-        "TRADYTICS_API_KEY": "tdy_your_key_here"
+        "TRADYTICS_API_KEY": "tdy_..."
       }
     }
   }
 }
 ```
 
-Or install globally:
-```bash
-pip install tradytics-mcp
-TRADYTICS_API_KEY="tdy_..." tradytics-mcp
-```
+## Example prompts
 
----
+Once connected, ask your assistant:
 
-## Available Data Scopes & Tools
+- *"Pull NVDA's largest opening options flow orders today, its dealer gamma flip and call/put walls, and top ranked dark pool levels."*
+- *"Search Apple's latest 10-K for supply chain risks and compare its last four quarters of revenue segments."*
+- *"Check SPY 0DTE dealer positioning and compare Kalshi/Polymarket S&P 500 probabilities against the options expected move."*
 
-All tools stay automatically in sync with `https://tradytics.com/mcp`:
+## Available tools
 
-| Scope | Key Tools |
+<details>
+<summary>Every tool exposed by the server (synced automatically from tradytics.com/mcp)</summary>
+
+| Scope | Tools |
 | :--- | :--- |
-| **Options flow & chains** | `get_options_flow`, `get_flow_summary`, `get_option_contracts`, `get_dealer_positioning`, `get_volatility` |
-| **Dark pools** | `get_dark_pool` (ranked block prints and volume price levels) |
-| **Stock perpetuals** | `get_perp_markets`, `get_perp_prints` |
+| **Options** | `get_options_flow`, `get_flow_summary`, `get_option_contracts`, `get_dealer_positioning`, `get_volatility` |
+| **Dark pool** | `get_dark_pool` |
+| **Perpetuals** | `get_perp_markets`, `get_perp_prints` |
 | **Equities & market** | `get_quotes`, `get_price_bars`, `get_stock_snapshot`, `get_stock_data`, `get_market`, `get_calendar`, `get_news`, `get_insights` |
-| **Fundamentals & SEC** | `get_fundamentals`, `get_transcripts`, `get_filings` (including semantic passage search), `get_disclosures`, `get_kpis` |
-| **Screening & signals** | `screen_stocks`, `get_screener_fields`, `get_signals`, `get_signal_performance` |
-| **Prediction markets** | `get_probabilities` (Kalshi and Polymarket) |
-| **AI Fund & account** | `get_ai_fund`, `get_my_portfolio`, `get_my_backtests`, `get_my_dashboards`, `get_my_watchlists`, `find_symbol` |
+| **Fundamentals & SEC** | `get_fundamentals`, `get_transcripts`, `get_filings`, `get_disclosures`, `get_kpis` |
+| **Screener & signals** | `screen_stocks`, `get_screener_fields`, `get_signals`, `get_signal_performance` |
+| **Probabilities & fund** | `get_probabilities`, `get_ai_fund` |
+| **Account & utilities** | `get_my_portfolio`, `get_my_backtests`, `get_my_dashboards`, `get_my_watchlists`, `find_symbol` |
 
----
+</details>
 
-## Related Packages & Resources
+## More
 
-- **Agent Skill (Claude Code, Codex, Cursor):** `npx skills add tradytics/skills` ([github.com/tradytics/skills](https://github.com/tradytics/skills))
-- **Starter prompts & scripts:** [github.com/tradytics/options-flow-mcp-starter](https://github.com/tradytics/options-flow-mcp-starter)
-- **Python & JS REST SDKs:** `pip install tradytics` | `npm install tradytics`
-- **Full docs & rate limits:** [tradytics.com/docs](https://tradytics.com/docs) | [tradytics.com/docs/rate-limits](https://tradytics.com/docs/rate-limits)
+- [MCP setup guide](https://tradytics.com/docs/mcp) and [rate limits](https://tradytics.com/docs/rate-limits)
+- [Python SDK](https://pypi.org/project/tradytics/): `pip install tradytics`
+- [JavaScript SDK](https://www.npmjs.com/package/tradytics): `npm install tradytics`
+- [Agent skill](https://www.skills.sh/tradytics/skills/tradytics): `npx skills add tradytics/skills`
+- [Starter prompts & scripts](https://github.com/tradytics/options-flow-mcp-starter)
+- [Market data API benchmark](https://github.com/tradytics/market-data-api-benchmark)
+- Support: [hello@tradytics.com](mailto:hello@tradytics.com)
 
-## License
-
-MIT. Not investment advice; all market data is for informational purposes only.
+MIT License. Not investment advice; all market data is for informational purposes only.
